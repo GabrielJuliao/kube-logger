@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <appender name="STDOUT_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RUN_APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${PATH_TO_RUN_LOGS}/application.log</file>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SECURITY_APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${PATH_TO_SECURITY_LOGS}/security.log</file>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT_APPENDER"/>
+        <appender-ref ref="RUN_APPENDER" />
+        <appender-ref ref="SECURITY_APPENDER"/>
+    </root>
+
+</configuration>
