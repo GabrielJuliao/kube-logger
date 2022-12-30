@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-
+<configuration debug="true">
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSSZZ} %5p ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n"/>
     <appender name="STDOUT_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <appender name="RUN_APPENDER" class="ch.qos.logback.core.FileAppender">
-        <file>${PATH_TO_RUN_LOGS}/application.log</file>
-        <encoder>
-            <Pattern>${LOG_PATTERN}</Pattern>
-        </encoder>
-    </appender>
+    <receiver class="ch.qos.logback.classic.net.server.SSLServerSocketReceiver">
+        <ssl>
+            <keyStore>
+                <location>${KEYSTORE_PATH}</location>
+                <password>${KEYSTORE_PASSWORD}</password>
+            </keyStore>
+        </ssl>
+    </receiver>
 
-    <appender name="SECURITY_APPENDER" class="ch.qos.logback.core.FileAppender">
-        <file>${PATH_TO_SECURITY_LOGS}/security.log</file>
-        <encoder>
-            <Pattern>${LOG_PATTERN}</Pattern>
-        </encoder>
-    </appender>
-
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT_APPENDER"/>
-        <appender-ref ref="RUN_APPENDER" />
-        <appender-ref ref="SECURITY_APPENDER"/>
     </root>
 
 </configuration>

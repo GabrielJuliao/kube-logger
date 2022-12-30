@@ -12,7 +12,8 @@ public class KubeLoggerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KubeLoggerApplication.class, args);
-		LoggerFactory.getLogger(KubeLoggerApplication.class).info("Kube logger rand UUID: "+ UUID.randomUUID());
+		Logger logger = LoggerFactory.getLogger(KubeLoggerApplication.class);
+		logger.info("Kube logger localImagePull rand UUID: "+ UUID.randomUUID());
 	}
 
 }
